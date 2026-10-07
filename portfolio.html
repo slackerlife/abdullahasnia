@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Asnia M. Abdullah — Aspiring Software Engineer</title>
+<meta name="description" content="Asnia M. Abdullah — Currently Pursuing Information Technology (BSIT). Aspiring Software Engineer building practical projects in C++, C#, Java, PHP and web development." />
+<style>
+  :root{
+    --bg:#05060d;
+    --bg-2:#080b16;
+    --panel:rgba(14,18,32,.72);
+    --panel-solid:#0c101d;
+    --line:rgba(140,170,255,.14);
+    --line-strong:rgba(140,170,255,.28);
+    --text:#e6eaf6;
+    --muted:#98a3c0;
+    --dim:#6f7a99;
+    --accent:#7aa2ff;
+    --accent-2:#c3a6ff;
+    --teal:#4fd1c5;
+    --pink:#ff7ab8;
+    --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:14px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ── constellation background ─────────────────────────── */
+  #sky{position:fixed;inset:0;z-index:0;display:block}
+  .veil{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(1100px 620px at 15% -10%, rgba(122,162,255,.14), transparent 60%),
+      radial-gradient(900px 520px at 92% 8%, rgba(195,166,255,.12), transparent 62%),
+      radial-gradient(1000px 700px at 50% 110%, rgba(79,209,197,.09), transparent 60%);
+  }
+  .grain{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+    background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+    background-size:3px 3px,3px 3px;
+  }
+
+  .wrap{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ── nav ──────────────────────────────────────────────── */
+  header.nav{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(14px);
+    background:rgba(5,6,13,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:14px;letter-spacing:.06em;color:var(--text);
+    text-decoration:none;
+  }
+  .brand .dotmark{
+    width:12px;height:12px;border-radius:3px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    box-shadow:0 0 14px rgba(122,162,255,.7);
+  }
+  nav.links{display:flex;gap:6px;flex-wrap:wrap}
+  nav.links a{
+    color:var(--muted);text-decoration:none;font-size:13px;font-family:var(--mono);
+    padding:6px 10px;border-radius:8px;border:1px solid transparent;transition:.18s;
+  }
+  nav.links a:hover{color:var(--text);border-color:var(--line-strong);background:rgba(122,162,255,.08)}
+
+  /* ── hero ─────────────────────────────────────────────── */
+  .hero{padding:96px 0 72px;position:relative}
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+    border:1px solid var(--line-strong);border-radius:999px;padding:7px 14px;
+    background:rgba(122,162,255,.06);
+  }
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(79,209,197,.6);animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,209,197,.55)}70%{box-shadow:0 0 0 9px rgba(79,209,197,0)}100%{box-shadow:0 0 0 0 rgba(79,209,197,0)}}
+
+  h1{
+    margin:26px 0 6px;
+    font-size:clamp(2.4rem,6.4vw,4.5rem);
+    line-height:1.02;letter-spacing:-.03em;font-weight:700;
+  }
+  h1 .grad{
+    background:linear-gradient(100deg,#8fb0ff 0%,#d8c4ff 45%,#7ff0e2 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .headline{
+    font-family:var(--mono);font-size:clamp(.92rem,2.1vw,1.12rem);
+    color:var(--muted);letter-spacing:.02em;margin:14px 0 22px;
+  }
+  .headline b{color:var(--teal);font-weight:600}
+  .lede{max-width:62ch;color:#c3cbe4;font-size:1.03rem}
+
+  .status-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .status{
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:rgba(255,255,255,.02);
+  }
+
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-family:var(--mono);font-size:13px;font-weight:500;
+    padding:12px 20px;border-radius:10px;border:1px solid var(--line-strong);
+    color:var(--text);background:rgba(255,255,255,.03);transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px);background:rgba(122,162,255,.12);box-shadow:0 8px 26px rgba(0,0,0,.45)}
+  .btn.primary{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    color:#0a0d18;border-color:transparent;font-weight:700;
+  }
+  .btn.primary:hover{box-shadow:0 10px 30px rgba(122,162,255,.35)}
+  .btn svg{width:16px;height:16px;fill:currentColor}
+
+  .scroll-hint{margin-top:52px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.18em;text-transform:uppercase}
+  .scroll-hint span{display:inline-block;animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(5px);opacity:1}}
+
+  /* ── section shell ────────────────────────────────────── */
+  section{padding:74px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--accent-2);letter-spacing:.14em}
+  h2{font-size:clamp(1.45rem,3.4vw,2rem);letter-spacing:-.02em;font-weight:650}
+  .sec-sub{color:var(--muted);max-width:70ch;margin-bottom:34px}
+
+  .panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;backdrop-filter:blur(8px);
+  }
+
+  /* ── about / recruiter columns ────────────────────────── */
+  .qa{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .qa .panel:hover{border-color:var(--line-strong)}
+  .qa h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .qa p{color:var(--muted);font-size:.95rem}
+  .qa ul{margin:10px 0 0 18px;color:var(--muted);font-size:.94rem}
+  .qa li{margin-bottom:5px}
+
+  /* ── stack ────────────────────────────────────────────── */
+  .stack-group{margin-bottom:26px}
+  .stack-label{
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;
+  }
+  .stack-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-strong),transparent)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12.5px;color:var(--text);
+    border:1px solid var(--line);border-radius:9px;padding:8px 12px;
+    background:rgba(255,255,255,.025);transition:.18s;
+  }
+  .chip:hover{transform:translateY(-2px);border-color:var(--c,var(--accent));background:rgba(255,255,255,.05)}
+  .chip i{width:8px;height:8px;border-radius:2px;background:var(--c,var(--accent));box-shadow:0 0 10px var(--c,var(--accent))}
+  .chip .mono-tag{color:var(--dim);font-size:11px}
+  .note{color:var(--dim);font-size:.9rem;margin-top:6px}
+
+  /* ── project cards ────────────────────────────────────── */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .card{
+    position:relative;display:flex;flex-direction:column;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;transition:.22s;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;opacity:0;transition:.22s;pointer-events:none;
+    background:radial-gradient(420px 180px at 12% 0%, rgba(122,162,255,.14), transparent 70%);
+  }
+  .card:hover{border-color:var(--line-strong);transform:translateY(-3px);box-shadow:0 18px 44px rgba(0,0,0,.45)}
+  .card:hover::before{opacity:1}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+  .status-pill{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--dim);
+    border:1px solid var(--line);border-radius:999px;padding:4px 10px;
+  }
+  .card h3{font-size:1.2rem;letter-spacing:-.01em;margin-bottom:8px}
+  .card .desc{color:var(--muted);font-size:.94rem;margin-bottom:14px}
+  .skills{margin:0 0 16px;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+  .skills li{position:relative;padding-left:20px;color:#b9c2da;font-size:.9rem}
+  .skills li::before{
+    content:"";position:absolute;left:2px;top:.58em;width:8px;height:8px;
+    border-left:1.5px solid var(--teal);border-bottom:1.5px solid var(--teal);transform:rotate(-45deg);
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .tag{
+    font-family:var(--mono);font-size:11px;color:var(--muted);
+    border:1px solid var(--line);border-radius:6px;padding:4px 9px;background:rgba(255,255,255,.02);
+  }
+  .card-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto}
+  .lnk{
+    font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--text);
+    border:1px solid var(--line-strong);border-radius:8px;padding:9px 14px;transition:.18s;
+    background:rgba(255,255,255,.03);display:inline-flex;align-items:center;gap:7px;
+  }
+  .lnk:hover{background:rgba(122,162,255,.14);transform:translateY(-1px)}
+  .lnk.pending{
+    color:var(--dim);border-style:dashed;border-color:var(--line);
+    background:transparent;cursor:not-allowed;
+  }
+  .lnk svg{width:14px;height:14px;fill:currentColor}
+
+  .source-note{
+    margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--dim);
+    border-left:2px solid var(--line-strong);padding:6px 0 6px 12px;
+  }
+  .source-note b{color:var(--pink);font-weight:600}
+
+  /* ── learning + mindset ───────────────────────────────── */
+  .two{display:grid;grid-template-columns:1.35fr 1fr;gap:20px}
+  .learn-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .learn-list li{
+    display:flex;gap:11px;align-items:flex-start;font-size:.93rem;color:var(--muted);
+    border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:rgba(255,255,255,.02);
+  }
+  .learn-list .idx{font-family:var(--mono);font-size:11px;color:var(--accent-2)}
+  .learn-list b{display:block;color:var(--text);font-weight:600;font-size:.95rem}
+
+  .mindset{font-family:var(--mono);font-size:.9rem;color:var(--muted)}
+  .mindset .cycle{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}
+  .mindset .cycle span{
+    border:1px solid var(--line-strong);border-radius:999px;padding:5px 11px;color:var(--text);font-size:11.5px;
+  }
+  .mindset .cycle em{color:var(--dim);align-self:center;font-style:normal}
+
+  /* ── education ────────────────────────────────────────── */
+  .edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .edu .panel h3{font-size:1.02rem;margin-bottom:6px}
+  .edu .panel .meta{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);letter-spacing:.08em;margin-bottom:12px}
+  .edu .panel p{color:var(--muted);font-size:.93rem}
+
+  /* ── contact ──────────────────────────────────────────── */
+  .contact{text-align:center;padding:80px 0 40px}
+  .links-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .links-grid a{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-family:var(--mono);font-size:13px;color:var(--text);
+    border:1px solid var(--line-strong);border-radius:10px;padding:12px 18px;
+    background:rgba(255,255,255,.03);transition:.2s;
+  }
+  .links-grid a:hover{transform:translateY(-2px);background:rgba(122,162,255,.12)}
+  .links-grid svg{width:16px;height:16px;fill:currentColor}
+  .mail{
+    font-family:var(--mono);font-size:clamp(.95rem,2.4vw,1.25rem);color:var(--text);
+    border-bottom:1px dashed var(--line-strong);padding-bottom:4px;word-break:break-all;
+  }
+
+  footer{
+    border-top:1px solid var(--line);padding:26px 0 46px;
+    font-family:var(--mono);font-size:11.5px;color:var(--dim);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  /* ── reveal ───────────────────────────────────────────── */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .qa,.cards,.two{grid-template-columns:1fr}
+    .learn-list{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    nav.links{display:none}
+    .hero{padding:64px 0 52px}
+    section{padding:58px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="dotmark"></span> slackerlife<span style="color:var(--dim)">.dev</span></a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#learning">Learning</a>
+      <a href="#mindset">Mindset</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ══ HERO ══════════════════════════════════════════ -->
+  <div class="wrap hero">
+    <span class="kicker"><span class="pulse"></span> Open to entry-level software roles</span>
+
+    <h1>Asnia M. <span class="grad">Abdullah</span></h1>
+
+    <p class="headline">
+      Currently Pursuing <b>Information Technology (BSIT)</b> &nbsp;•&nbsp; Aspiring Software Engineer
+    </p>
+
+    <p class="lede">
+      I'm an entry-level developer learning by building. My work so far is a C++ console
+      calculator with its own expression parser, a Java Swing point-of-sale interface, and a
+      browser to-do app built with HTML, CSS and JavaScript. I write code to understand it —
+      then I rewrite it until it's cleaner than the first version.
+    </p>
+
+    <div class="status-row">
+      <span class="status">BSIT — currently pursuing</span>
+      <span class="status">Entry-level developer</span>
+      <span class="status">Continuous learner</span>
+      <span class="status">Project-based learning</span>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/slackerlife" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        View GitHub
+      </a>
+      <a class="btn" href="mailto:a09614054@gmail.com">
+        <svg viewBox="0 0 16 16"><path d="M1.5 3A1.5 1.5 0 0 0 0 4.5v7A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 3h-13zM1 4.6l7 4.7 7-4.7v-.1H1v.1zM1 5.4V12h14V5.4l-7 4.7-7-4.7z"/></svg>
+        Email Me
+      </a>
+      <a class="btn" href="#projects">See My Projects</a>
+    </div>
+
+    <div class="scroll-hint"><span>scroll to explore ↓</span></div>
+  </div>
+
+  <!-- ══ ABOUT ═════════════════════════════════════════ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">01</span><h2>About Me</h2></div>
+      <p class="sec-sub reveal">
+        A short, honest summary of where I am in my studies and how I'm learning.
+      </p>
+
+      <div class="qa">
+        <div class="panel reveal">
+          <h3>Who am I?</h3>
+          <p>
+            I'm an Information Technology (BSIT) student and aspiring software engineer based on my
+            academic work. I don't have professional engineering experience yet — what I do have is a
+            habit of building things, breaking them, and fixing them again until they work.
+          </p>
+        </div>
+        <div class="panel reveal">
+          <h3>What can I build?</h3>
+          <ul>
+            <li>C++ console programs and parsers</li>
+            <li>Java Swing desktop interfaces</li>
+            <li>HTML / CSS / JavaScript web apps</li>
+            <li>C# and PHP — currently learning</li>
+          </ul>
+        </div>
+        <div class="panel reveal">
+          <h3>How am I developing?</h3>
+          <ul>
+            <li>Learning fundamentals before frameworks</li>
+            <li>Building small complete projects</li>
+            <li>Writing documentation as I go</li>
+            <li>Improving old code instead of discarding it</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel reveal" style="margin-top:20px">
+        <h3 style="font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Education</h3>
+        <div class="edu">
+          <div>
+            <h3>Bachelor of Science in Information Technology</h3>
+            <div class="meta">BSIT — Currently Pursuing</div>
+            <p>Coursework and academic projects across programming, application development and web technologies. Project work is where most of my learning actually happens.</p>
+          </div>
+          <div>
+            <h3>Academic Project Work</h3>
+            <div class="meta">Course assignments &amp; practical builds</div>
+            <p>Java desktop application work built in NetBeans, C++ console programs, and web interface projects — developed as graded assignments and self-directed builds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STACK ══════════════════════════════════════════ -->
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">02</span><h2>Tech Stack</h2></div>
+      <p class="sec-sub reveal">
+        Technologies I have worked with. These are my current tools, not claims of mastery —
+        I am still at beginner / entry-level with each of them.
+      </p>
+
+      <div class="stack-group reveal">
+        <div class="stack-label">Languages I've worked with</div>
+        <div class="chips">
+          <span class="chip" style="--c:#659ad2"><i></i>C++ <span class="mono-tag">console</span></span>
+          <span class="chip" style="--c:#9a4f9e"><i></i>C# <span class="mono-tag">learning</span></span>
+          <span class="chip" style="--c:#f89820"><i></i>Java <span class="mono-tag">Swing</span></span>
+          <span class="chip" style="--c:#777bb4"><i></i>PHP <span class="mono-tag">learning</span></span>
+          <span class="chip" style="--c:#e34c26"><i></i>HTML5</span>
+          <span class="chip" style="--c:#1572b6"><i></i>CSS3</span>
+          <span class="chip" style="--c:#f7df1e"><i></i>JavaScript</span>
+        </div>
+        <p class="note">Skill level: beginner / entry-level. Concepts demonstrated, not mastered.</p>
+      </div>
+
+      <div class="stack-group reveal">
+        <div class="stack-label">Tools I use</div>
+        <div class="chips">
+          <span class="chip" style="--c:#7aa2ff"><i></i>Visual Studio Code</span>
+          <span class="chip" style="--c:#c3a6ff"><i></i>Visual Studio</span>
+          <span class="chip" style="--c:#4fd1c5"><i></i>NetBeans <span class="mono-tag">Java IDE</span></span>
+          <span class="chip" style="--c:#ff7ab8"><i></i>Git</span>
+          <span class="chip" style="--c:#c9d1e4"><i></i>GitHub</span>
+          <span class="chip" style="--c:#8b5cf6"><i></i>Canva <span class="mono-tag">UI / graphics</span></span>
+          <span class="chip" style="--c:#5b8dd6"><i></i>Microsoft Office</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROJECTS ═══════════════════════════════════════ -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">03</span><h2>Featured Projects</h2></div>
+      <p class="sec-sub reveal">
+        Academic and self-directed projects. Every feature below was read from the actual
+        source files — nothing is described that isn't in the code yet.
+      </p>
+
+      <div class="cards">
+
+        <!-- 1 · C++ -->
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="cat">C++ Programming / Calculator Application</span>
+            <span class="status-pill">console</span>
+          </div>
+          <h3>Cute Calculator</h3>
+          <p class="desc">
+            A single-file C++17 command-line calculator built around a hand-written recursive
+            descent expression parser. You type expressions; it tokenises and evaluates them
+            with proper operator precedence instead of using <code>eval</code> or splitting
+            strings on a delimiter.
+          </p>
+          <ul class="skills">
+            <li>Arithmetic with precedence, parentheses, unary minus, <code>^</code> powers, <code>%</code> modulo, factorial <code>!</code></li>
+            <li>33 math functions: <code>sqrt</code>, <code>sin</code>, <code>ln</code>, <code>log</code>, <code>pow</code>, <code>root</code>, <code>hypot</code> and more — each arity-checked</li>
+            <li>Constants (<code>pi</code>, <code>e</code>, <code>tau</code>) and <code>ans</code> for reusing the previous result</li>
+            <li>Several expressions per line separated by <code>;</code>, plus commands: <code>:help</code>, <code>:hist</code>, <code>:clear</code>, <code>:ans</code>, <code>:quit</code></li>
+            <li>Error handling by domain guard — division by zero, <code>ln</code> of a negative, wrong argument count — all caught as readable messages</li>
+            <li>ANSI colour output with Windows VT-mode enabling and an <code>isatty</code> check so piped output stays clean</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">C++17</span><span class="tag">std::map</span><span class="tag">std::vector</span>
+            <span class="tag">function pointers</span><span class="tag">recursion</span><span class="tag">exceptions</span>
+            <span class="tag">&lt;cmath&gt;</span><span class="tag">standard library only</span>
+          </div>
+          <div class="card-links">
+            <a class="lnk" href="https://github.com/slackerlife" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              View Repository
+            </a>
+            <span class="lnk pending">Demo — [ADD DEMO]</span>
+          </div>
+          <p class="source-note">
+            <b>Accuracy note:</b> the project folder is named "binary calculator", but the current
+            <code>cute_calc.cpp</code> source implements a general expression calculator. No binary
+            conversion feature exists in the code yet, so I have not listed one.
+          </p>
+        </article>
+
+        <!-- 2 · Java POS -->
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="cat">Java Programming / POS Terminal</span>
+            <span class="status-pill">desktop</span>
+          </div>
+          <h3>Simple POS — Fast-Food Point of Sale</h3>
+          <p class="desc">
+            A Java Swing desktop interface for a fast-food ordering counter, built as a NetBeans
+            Swing Forms project. The screen covers the cashier workflow: pick an item, build the
+            order, take payment, and read the change back.
+          </p>
+          <ul class="skills">
+            <li>Numeric keypad layout with items 1–6 mapped to menu buttons</li>
+            <li>Order grid of ID / Item / Qty / Price using a <code>JTable</code> with <code>DefaultTableModel</code></li>
+            <li>Receipt panel via <code>JTextArea</code> in a scroll pane</li>
+            <li>Transaction readout for Cash, Balance and Total, with a Pay action</li>
+            <li>Event-driven GUI work: <code>ActionListener</code> handlers wired per button</li>
+            <li>Layout work across <code>GroupLayout</code> and <code>AbsoluteLayout</code> (netbeans awtextra)</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Java</span><span class="tag">Swing</span><span class="tag">JFrame</span>
+            <span class="tag">JTable</span><span class="tag">Event handling</span><span class="tag">NetBeans</span>
+          </div>
+          <div class="card-links">
+            <a class="lnk" href="https://github.com/slackerlife" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              View Repository
+            </a>
+            <span class="lnk pending">Demo — [ADD DEMO]</span>
+            <span class="lnk pending">Screenshots — [ADD SCREENSHOTS]</span>
+          </div>
+          <p class="source-note">
+            <b>Current state:</b> the interface is built, but the button handlers in the source are
+            still <code>// TODO add your handling code here</code> stubs. So the layout and controls are
+            real; the order, payment and change logic is the next thing to implement.
+          </p>
+        </article>
+
+        <!-- 3 · To-do -->
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="cat">Web Development</span>
+            <span class="status-pill">front-end</span>
+          </div>
+          <h3>To-Do List</h3>
+          <p class="desc">
+            A small but complete task list that runs entirely in the browser — no framework, no
+            build step. Adding, completing and deleting tasks all persist between reloads through
+            <code>localStorage</code>.
+          </p>
+          <ul class="skills">
+            <li>Semantic structure with a clean HTML document outline</li>
+            <li>Flexbox layout, custom checkboxes and hover state transitions in CSS</li>
+            <li>DOM creation and re-rendering without a framework</li>
+            <li>One delegated click listener on the list handles both toggle and delete</li>
+            <li>JSON <code>localStorage</code> persistence with <code>loadTodos</code> / <code>saveTodos</code></li>
+            <li>Empty state, Enter-key submission, input trimming, word-wrap on long tasks</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
+            <span class="tag">DOM</span><span class="tag">localStorage</span><span class="tag">Responsive</span>
+          </div>
+          <div class="card-links">
+            <a class="lnk" href="https://github.com/slackerlife" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              View Repository
+            </a>
+            <span class="lnk pending">Live demo — [ADD DEMO]</span>
+          </div>
+        </article>
+
+        <!-- 4 · Java website design -->
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="cat">Java Programming / Website Design</span>
+            <span class="status-pill">in progress</span>
+          </div>
+          <h3>Website Design Page — Java</h3>
+          <p class="desc">
+            A Java project where the layout and design of a web page are being reproduced inside
+            a desktop application. Source files for this project have not been shared yet, so I am
+            not describing any behaviour I cannot verify.
+          </p>
+          <ul class="skills">
+            <li><b>[VERIFY FROM Java SOURCE CODE]</b> — application type and entry point</li>
+            <li><b>[VERIFY FROM Java SOURCE CODE]</b> — layout components used</li>
+            <li><b>[VERIFY FROM Java SOURCE CODE]</b> — navigation and user interactions</li>
+            <li><b>[VERIFY FROM Java SOURCE CODE]</b> — whether original HTML/CSS assets are reused</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Java</span><span class="tag">GUI / UI work</span><span class="tag">Pending source</span>
+          </div>
+          <div class="card-links">
+            <span class="lnk pending">Repository — [ADD GITHUB REPOSITORY]</span>
+            <span class="lnk pending">Demo — [ADD DEMO]</span>
+            <span class="lnk pending">Screenshots — [ADD SCREENSHOTS]</span>
+          </div>
+          <p class="source-note">
+            <b>Note:</b> this is a separate project from the C++ calculator and from the Java POS
+            terminal. No Visual Basic .NET files are being used as evidence for it.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LEARNING ═══════════════════════════════════════ -->
+  <section id="learning">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">04</span><h2>Currently Learning</h2></div>
+      <p class="sec-sub reveal">
+        Still at the fundamentals stage, and being honest about that. These are the areas I'm
+        actively studying right now, not completed expertise.
+      </p>
+
+      <div class="two">
+        <ul class="learn-list reveal">
+          <li><span class="idx">01</span><span><b>Programming fundamentals</b>Core logic, control flow, functions and problem decomposition.</span></li>
+          <li><span class="idx">02</span><span><b>C++</b>Deeper STL use, pointers and memory, and structuring larger programs.</span></li>
+          <li><span class="idx">03</span><span><b>C#</b>Desktop application basics and object-oriented structure.</span></li>
+          <li><span class="idx">04</span><span><b>Java</b>Collections, file handling and implementing the missing POS logic.</span></li>
+          <li><span class="idx">05</span><span><b>PHP &amp; web development</b>Form handling, and connecting a front end to a back end.</span></li>
+          <li><span class="idx">06</span><span><b>Git / GitHub workflow</b>Branching, meaningful commits and repository documentation.</span></li>
+          <li><span class="idx">07</span><span><b>Building practical applications</b>Finishing the POS handlers end to end rather than leaving stubs.</span></li>
+          <li><span class="idx">08</span><span><b>Project documentation</b>Writing a real README for each project, with screenshots and run steps.</span></li>
+          <li><span class="idx">09</span><span><b>Clean, maintainable code</b>Naming, removing duplication and refactoring my own earlier work.</span></li>
+          <li><span class="idx">10</span><span><b>Software engineering concepts</b>Requirements, debugging process and basic testing habits.</span></li>
+        </ul>
+
+        <div class="panel reveal mindset">
+          <h3 style="font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">Developer Mindset</h3>
+          <div class="cycle">
+            <span>learn</span><em>→</em><span>build</span><em>→</em><span>get it wrong</span><em>→</em><span>fix</span><em>→</em><span>improve</span><em>→</em><span>try again</span>
+          </div>
+          <p>
+            I see software development as a loop, not a straight line. The POS project has buttons
+            that don't work yet — that's the loop, not a failure. I read the code, work out what's
+            missing, fix it, then rewrite it cleaner once I understand why it worked the first time.
+          </p>
+          <p style="margin-top:14px;color:var(--dim)">
+            Perseverance · Adaptable · Continuous learning
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="sec-head reveal" style="justify-content:center"><span class="sec-num">05</span><h2>Contact</h2></div>
+      <p class="sec-sub reveal" style="margin:12px auto 0;text-align:center">
+        If you're hiring for an entry-level software engineering role, or reviewing early-stage
+        developer work, I'd be glad to hear from you.
+      </p>
+      <p class="mail reveal"><a href="mailto:a09614054@gmail.com" style="color:inherit;text-decoration:none">a09614054@gmail.com</a></p>
+
+      <div class="links-grid reveal">
+        <a href="https://github.com/slackerlife" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          github.com/slackerlife
+        </a>
+        <a href="mailto:a09614054@gmail.com">
+          <svg viewBox="0 0 16 16"><path d="M1.5 3A1.5 1.5 0 0 0 0 4.5v7A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 3h-13zM1 4.6l7 4.7 7-4.7v-.1H1v.1zM1 5.4V12h14V5.4l-7 4.7-7-4.7z"/></svg>
+          Send an email
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%">
+    <span>Asnia M. Abdullah — BSIT student, aspiring software engineer</span>
+    <span>Built by hand · Dark constellation theme</span>
+  </div>
+</footer>
+
+<script>
+/* ── constellation starfield ───────────────────────────── */
+(function () {
+  const c = document.getElementById('sky');
+  const ctx = c.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w, h, stars = [], dpr = 1, raf = null, t = 0;
+
+  const PALETTE = ['#7aa2ff', '#c3a6ff', '#4fd1c5', '#e8ecff', '#ff7ab8'];
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    c.style.width = w + 'px'; c.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  function build() {
+    const density = Math.round((w * h) / 11000);
+    const count = Math.max(45, Math.min(density, 190));
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.25 + 0.35,
+        p: Math.random() * Math.PI * 2,
+        s: Math.random() * 0.9 + 0.25,
+        c: PALETTE[(Math.random() * PALETTE.length) | 0]
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      const tw = reduce ? 1 : 0.55 + 0.45 * Math.sin(t * s.s + s.p);
+      ctx.globalAlpha = Math.max(0.08, tw * 0.85);
+      ctx.fillStyle = s.c;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r * (0.75 + tw * 0.4), 0, 6.2832);
+      ctx.fill();
+
+      /* constellation links to nearby stars */
+      for (let j = i + 1; j < stars.length; j++) {
+        const o = stars[j];
+        const dx = s.x - o.x, dy = s.y - o.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 15000) {
+          const alpha = (1 - d2 / 15000) * 0.16 * Math.max(tw, 0.35);
+          ctx.globalAlpha = alpha;
+          ctx.strokeStyle = '#8fb0ff';
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(o.x, o.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function loop() { t += 0.016; draw(); raf = requestAnimationFrame(loop); }
+
+  size();
+  if (reduce) { draw(); }
+  else { raf = requestAnimationFrame(loop); }
+
+  let rz;
+  window.addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => { size(); if (reduce) draw(); }, 160);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (reduce) return;
+    if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+    else if (!raf) { raf = requestAnimationFrame(loop); }
+  });
+})();
+
+/* ── scroll reveal ────────────────────────────────────── */
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 55);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
